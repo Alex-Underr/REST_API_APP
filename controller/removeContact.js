@@ -1,8 +1,8 @@
 const { requestError } = require("../helpers");
-const contacts = require("../models/contacts");
+const { Contact } = require("../schema/contacts");
 const removeContact = async (req, res, next) => {
   const { id } = req.params;
-  const result = await contacts.removeContact(id);
+  const result = await Contact.findByIdAndRemove(id);
   if (!result) {
     throw requestError(404, "Not found!");
   }
