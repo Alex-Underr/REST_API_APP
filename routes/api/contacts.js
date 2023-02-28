@@ -9,11 +9,13 @@ router.get("/", controllerCatches(controllers.listContacts));
 
 router.get("/:id", controllerCatches(controllers.getContactById));
 
-router.post("/", validator(schemas), controllerCatches(controllers.addContact));
+router.post("/",
+ validator(schemas.schema),
+  controllerCatches(controllers.addContact));
 
 router.put(
   "/:id",
-  validator(schemas),
+  validator(schemas.schema),
   controllerCatches(controllers.updateContact)
 );
 
