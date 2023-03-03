@@ -11,5 +11,5 @@ module.exports = {
   getContactById,
   updateContact,
   removeContact,
-  updateFavorite
+  updateFavorite,
 };

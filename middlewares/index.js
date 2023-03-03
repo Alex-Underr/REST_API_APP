@@ -1,3 +1,4 @@
 const validateFunc = require("./validator");
+const authentication = require("./validator");
 
-module.exports = validateFunc;
+module.exports = { authentication, validateFunc };
