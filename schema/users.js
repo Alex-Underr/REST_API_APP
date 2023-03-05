@@ -7,6 +7,10 @@ const typesOfSubscriptions = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: [true, "Sen user name"],
+    },
     password: {
       type: String,
       required: [true, "Set password for user"],
@@ -34,7 +38,7 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string()
     .email({
-      minDomainSegments: 2,
+      minDomainSegments: 1,
       tlds: { allow: ["com", "net", "uk"] },
     })
     .pattern(emailValidate)
@@ -45,7 +49,7 @@ const registerSchema = Joi.object({
 const loginSchema = Joi.object({
   email: Joi.string()
     .email({
-      minDomainSegments: 2,
+      minDomainSegments: 1,
       tlds: { allow: ["com", "net", "uk"] },
     })
     .pattern(emailValidate)

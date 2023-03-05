@@ -18,5 +18,3 @@ const register = async (req, res) => {
 };
 
 module.exports = register;
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGQzMTMyMTcwOGRkNGQ2ZGUyZDNlYyIsImlhdCI6MTY3NTQ0MDQ1MCwiZXhwIjoxNjc1NTI2ODUwfQ.HUrm_5AbrIqwLZ1dSZ9dOLF2pbKoVqJ2k-q9pxjWGnM

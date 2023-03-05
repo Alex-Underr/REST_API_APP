@@ -7,10 +7,12 @@ const schema = Joi.object({
 
   phone: Joi.string().required(),
 
-  email: Joi.string().email({
-    minDomainSegments: 2,
-    tlds: { allow: ["com", "net", "uk"] },
-  }),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 1,
+      tlds: { allow: ["com", "net", "uk"] },
+    })
+    .required(),
 });
 
 const contactsSchema = new Schema(

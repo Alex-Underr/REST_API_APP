@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const { controllerCatches } = require("../../helpers");
 const { validateFunc, authentication } = require("../../middlewares");
 const controllers = require("../../controller/contacts");
