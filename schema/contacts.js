@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 const { handleSaveErrors } = require("../helpers");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const schema = Joi.object({
   name: Joi.string().alphanum().min(3).max(30).required(),
@@ -39,6 +40,7 @@ const contactsSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 contactsSchema.post("save", handleSaveErrors);
+contactsSchema.plugin(mongoosePaginate);
 
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),

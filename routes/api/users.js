@@ -21,13 +21,13 @@ router.post(
 router.get(
   "/current",
   authentication,
-  controllerCatches(controllers.getCurrent)
+  controllerCatches(controllers.getCurrentUser)
 );
 
 router.get("/logout", authentication, controllerCatches(controllers.logout));
 
 router.patch(
-  "/users/:id/subscription",
+  "/:id/subscription",
   authentication,
   validateFunc(joiUserSchemas.subscriptionSchema),
   controllerCatches(controllers.subscription)
