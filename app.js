@@ -31,8 +31,10 @@ app.use(express.json());
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", usersRouter);
 
-app.use((req, res) => {
-  res.status(404).json({ message: "Not found!" });
+app.use((req, res, next) => {
+  const error = new Error("Not found!");
+  error.status = 404;
+  next(error);
 });
 
 app.use((err, req, res, next) => {

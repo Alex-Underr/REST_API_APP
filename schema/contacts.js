@@ -4,7 +4,7 @@ const { handleSaveErrors } = require("../helpers");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const schema = Joi.object({
-  name: Joi.string().alphanum().min(3).max(30).required(),
+  name: Joi.string().min(3).max(30).required(),
 
   phone: Joi.string().required(),
 

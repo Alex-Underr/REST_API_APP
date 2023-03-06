@@ -3,7 +3,7 @@ const { schemas, Contact } = require("../../schema/contacts");
 
 const updateContact = async (req, res, next) => {
   const { id } = req.params;
-  const { error } = schemas.validate(req.body);
+  const { error } = schemas.schema.validate(req.body);
   if (error) {
     throw requestError(400, error.message);
   }

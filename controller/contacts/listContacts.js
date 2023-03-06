@@ -3,15 +3,19 @@ const { Contact } = require("../../schema/contacts");
 const listContacts = async (req, res) => {
   try {
     const { _id: owner } = req.user;
-    console.log(owner);
+    const result = await Contact.find({ owner }).populate(
+      "owner",
+      "name email"
+    );
+    // Закоментувати для отримання пагінації (залогінений):
+    res.json(result);
+
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const options = {
       page,
       limit,
       sort: { name: 1 },
-      populate: "owner",
-      select: "name email phone",
     };
 
     const favorite = req.query.favorite;
@@ -23,7 +27,6 @@ const listContacts = async (req, res) => {
     if (favoriteContacts.length === 0) {
       res.status(404).json({ message: "Not find" });
     }
-    // res.json(favoriteContacts);
 
     const resultPaginate = await Contact.paginate(filter, options);
     res.json(resultPaginate);
