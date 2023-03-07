@@ -1,14 +1,13 @@
-const { requestError } = require("../helpers");
-const { Contact } = require("../schema/contacts");
-const { schema } = require("../schema/contacts");
+const { requestError } = require("../../helpers");
+const { schemas, Contact } = require("../../schema/contacts");
 
 const updateContact = async (req, res, next) => {
   const { id } = req.params;
-  const { error } = schema.validate(req.body);
+  const { error } = schemas.schema.validate(req.body);
   if (error) {
     throw requestError(400, error.message);
   }
-  const result = await Contact.findByIdAndUpdate(id, req.body, {new: true});
+  const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
     throw requestError(404, "Not found!");
   }
