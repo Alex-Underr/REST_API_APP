@@ -1,26 +1,26 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = process.env;
+// const { SECRET_KEY } = process.env;
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
 
 const app = express();
-const payload = {
-  id: "63f3a1546165dbb60d7e6c52",
-};
-const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
-// const id = jwt.decode(token, SECRET_KEY);
-try {
-  const id = jwt.verify(token, SECRET_KEY);
-  console.log(id);
-} catch (error) {
-  error.status = 401;
-  console.log(error.status);
-  console.log(error.message);
-}
+// const payload = {
+//   id: "63f3a1546165dbb60d7e6c52",
+// };
+// const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+// // const id = jwt.decode(token, SECRET_KEY);
+// try {
+//   const id = jwt.verify(token, SECRET_KEY);
+//   console.log(id);
+// } catch (error) {
+//   error.status = 401;
+//   console.log(error.status);
+//   console.log(error.message);
+// }
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
