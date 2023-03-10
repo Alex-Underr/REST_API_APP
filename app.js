@@ -2,10 +2,29 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 // const jwt = require("jsonwebtoken");
-
 // const { SECRET_KEY } = process.env;
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
+
+const multer = require("multer");
+const path = require("path");
+
+const tmpFolder = path.join(__dirname, "tmp");
+
+const multerConfig = multer.diskStorage({
+  destination: tmpFolder,
+  filename: (req, file, cb) => {
+    cb(null, file.originalName);
+  },
+});
+
+const upload = multer({
+  storage: multerConfig,
+});
+
+const contactsFolder = path.join(__dirname, "public", "avatars");
+
+app.post;
 
 const app = express();
 // const payload = {
