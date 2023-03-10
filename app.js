@@ -5,16 +5,18 @@ const cors = require("cors");
 // const { SECRET_KEY } = process.env;
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
-
+const app = express();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs/promises");
 
 const tmpFolder = path.join(__dirname, "tmp");
+const contactsFolder = path.join(__dirname, "public", "avatars");
 
 const multerConfig = multer.diskStorage({
   destination: tmpFolder,
   filename: (req, file, cb) => {
-    cb(null, file.originalName);
+    cb(null, file.originalname);
   },
 });
 
@@ -22,11 +24,18 @@ const upload = multer({
   storage: multerConfig,
 });
 
-const contactsFolder = path.join(__dirname, "public", "avatars");
+app.post("/api/contacts", upload.single("avatar"), async (req, res) => {
+  const { path: tmpUpload, originalname } = req.file;
+  console.log(req.file);
+  console.log(req.body);
+  const resultUpload = path.join(contactsFolder, originalname);
+  await fs.rename(tmpUpload, resultUpload);
+  const avatarName = path.join("avatars", originalname);
+  console.log(avatarName);
+});
 
-app.post;
+// Перевірка токена через jwt
 
-const app = express();
 // const payload = {
 //   id: "63f3a1546165dbb60d7e6c52",
 // };
