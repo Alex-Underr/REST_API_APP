@@ -2,12 +2,44 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 // const jwt = require("jsonwebtoken");
-
 // const { SECRET_KEY } = process.env;
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
-
 const app = express();
+
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs/promises");
+
+const tmpFolder = path.join(__dirname, "temp");
+const contactsFolder = path.join(__dirname, "public", "avatars");
+
+const multerConfig = multer.diskStorage({
+  destination: tmpFolder,
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: multerConfig,
+});
+
+app.post("/api/contacts", upload.single("avatar"), async (req, res) => {
+  const { path: tmpUpload, originalname } = req.file;
+  console.log(req.file);
+  const resultUpload = path.join(contactsFolder, originalname);
+  await fs.rename(tmpUpload, resultUpload);
+  const avatarName = path.join("avatars", originalname);
+  const newAvatar = { ...req.body, avatarName };
+  res.status(201).json(newAvatar);
+});
+
+app.use(express.static("public"));
+app.use(express.static("public/avatars"));
+
+// Перевірка токена через jwt
+
 // const payload = {
 //   id: "63f3a1546165dbb60d7e6c52",
 // };

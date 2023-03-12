@@ -5,7 +5,7 @@ const { controllerCatches } = require("../../helpers");
 const { joiUserSchemas } = require("../../schema/users");
 const controllers = require("../../controller/auth");
 const router = express.Router();
-
+const upload = require("../../middlewares/upload");
 router.post(
   "/register",
   validateFunc(joiUserSchemas.registerSchema),
@@ -31,6 +31,13 @@ router.patch(
   authentication,
   validateFunc(joiUserSchemas.subscriptionSchema),
   controllerCatches(controllers.subscription)
+);
+
+router.patch(
+  "/avatar",
+  authentication,
+  upload.single("avatar"),
+  controllerCatches(controllers.updateAvatar)
 );
 
 module.exports = router;
