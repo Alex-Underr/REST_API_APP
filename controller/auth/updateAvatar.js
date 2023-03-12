@@ -6,7 +6,6 @@ const { User } = require("../../schema/users");
 const avatarsFolder = path.join(__dirname, "../../", "public", "avatars");
 
 const updateAvatar = async (req, res) => {
-  console.log(req.user);
   const { _id } = req.user;
   const { path: tmpFolder, originalname } = req.file;
   const extention = originalname.split(".").pop();
