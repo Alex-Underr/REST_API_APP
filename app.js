@@ -5,26 +5,10 @@ const cors = require("cors");
 // const { SECRET_KEY } = process.env;
 const contactsRouter = require("./routes/api/contacts");
 const usersRouter = require("./routes/api/users");
-const app = express();
 
+const app = express();
 app.use(express.static("public"));
 app.use(express.static("public/avatars"));
-
-// Перевірка токена через jwt
-
-// const payload = {
-//   id: "63f3a1546165dbb60d7e6c52",
-// };
-// const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
-// // const id = jwt.decode(token, SECRET_KEY);
-// try {
-//   const id = jwt.verify(token, SECRET_KEY);
-//   console.log(id);
-// } catch (error) {
-//   error.status = 401;
-//   console.log(error.status);
-//   console.log(error.message);
-// }
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -47,3 +31,19 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+// Перевірка токена через jwt
+
+// const payload = {
+//   id: "63f3a1546165dbb60d7e6c52",
+// };
+// const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+// // const id = jwt.decode(token, SECRET_KEY);
+// try {
+//   const id = jwt.verify(token, SECRET_KEY);
+//   console.log(id);
+// } catch (error) {
+//   error.status = 401;
+//   console.log(error.status);
+//   console.log(error.message);
+// }
