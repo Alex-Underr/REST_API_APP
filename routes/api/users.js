@@ -18,6 +18,14 @@ router.post(
   controllerCatches(controllers.login)
 );
 
+router.get("/verify/:verificationToken", controllerCatches(controllers.verify));
+
+router.post(
+  "/verify",
+  validateFunc(joiUserSchemas.verifyEmailSchema),
+  controllerCatches(controllers.resendEmail)
+);
+
 router.get(
   "/current",
   authentication,
